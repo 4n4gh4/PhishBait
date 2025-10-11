@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "PhishBait",
+  "version": "1.0",
+  "description": "Detects and warns about potential phishing attempts on online games",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://skribbl.io/*",
+        "http://localhost:3000/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}
+
