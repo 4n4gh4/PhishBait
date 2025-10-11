@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Hangman Multiplayer</title>
+<style>
+    /* --- General Page Setup --- */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        background: linear-gradient(135deg, #74ABE2, #5563DE);
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 30px;
+    }
+
+    h1 {
+        color: #fff;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    /* --- Card Containers --- */
+    #joinDiv, #game {
+        width: 100%;
+        max-width: 600px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 20px 25px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    #game {
+        display: none;
+    }
+
+    /* --- Inputs & Buttons --- */
+    input, button {
+        padding: 10px;
+        margin: 5px 0;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        outline: none;
+        transition: 0.3s ease;
+    }
+
+    input:focus {
+        border-color: #5563DE;
+        box-shadow: 0 0 6px rgba(85, 99, 222, 0.3);
+    }
+
+    button {
+        background: #5563DE;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+        background: #3849c7;
+        transform: scale(1.05);
+    }
+
+    /* --- Player List --- */
+    #playersList {
+        list-style: none;
+        padding-left: 0;
+        background: #f9f9f9;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    }
+
+    #playersList li {
+        padding: 5px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    #playersList li:last-child {
+        border-bottom: none;
+    }
+
+    /* --- Game Display --- */
+    #wordDisplay {
+        font-size: 28px;
+        letter-spacing: 12px;
+        text-align: center;
+        margin: 20px 0;
+        color: #222;
+    }
+
+    #gameControls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    #wrongGuesses {
+        font-weight: bold;
+        color: #d9534f;
+    }
+
+    #status {
+        text-align: center;
+        font-size: 18px;
+        margin-top: 10px;
+        font-weight: 500;
+    }
+
+    /* --- Chat Section --- */
+    #chatBox {
+        height: 220px;
+        border: 1px solid #ccc;
+        overflow-y: auto;
+        padding: 10px;
+        background: #f9fafc;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    #chatBox p {
+        margin: 6px 0;
+        padding: 6px 10px;
+        background: #eef1ff;
+        border-radius: 8px;
+        width: fit-content;
+        max-width: 80%;
+        word-wrap: break-word;
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    #chatForm {
+        display: flex;
+        gap: 8px;
+    }
+
+    #chatInput {
+        flex: 1;
+        border-radius: 8px;
+    }
+
+    /* --- Scrollbar Styling --- */
+    #chatBox::-webkit-scrollbar {
+        width: 8px;
+    }
+    #chatBox::-webkit-scrollbar-thumb {
+        background: #c2c6ff;
+        border-radius: 10px;
+    }
+
+    /* --- Animations --- */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+</head>
+<body>
+
+<h1>🎯 Hangman Online Multiplayer</h1>
+
+<div id="joinDiv">
+    <input id="nameInput" placeholder="Enter your name">
+    <input id="roomInput" placeholder="Enter room name">
+    <button id="joinBtn">Join Room</button>
+</div>
+
+<div id="game">
+    <h2>👥 Players in Room</h2>
+    <ul id="playersList"></ul>
+
+    <p id="wordDisplay">_ _ _ _ _</p>
+
+    <div id="gameControls">
+        <input id="letterInput" maxlength="1" placeholder="Letter">
+        <button id="guessBtn">Guess</button>
+    </div>
+
+    <p>❌ Wrong guesses: <span id="wrongGuesses">0</span></p>
+    <p id="status"></p>
+
+    <h2>💬 Chat</h2>
+    <div id="chatBox"></div>
+    <form id="chatForm">
+        <input id="chatInput" placeholder="Type a message" autocomplete="off">
+        <button type="submit">Send</button>
+    </form>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="client.js"></script>
+
+</body>
+</html>
