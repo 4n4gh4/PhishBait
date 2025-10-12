@@ -7,8 +7,8 @@
 * **Team Members:**
 
   * Anagha B Prashanth - CB.SC.U4CYS23002 [[@4n4gh4]](https://github.com/4n4gh4)
-  * Devinandha - CB.SC.U4CYS23011 [[@ishitha05praveen]](https://github.com/ishitha05praveen)
-  * Ishitha Praveen - CB.SC.U4CYS23018 [[@devinandha1222]](https://github.com/devinandha1222)
+  * Devinandha - CB.SC.U4CYS23011 [[@devinandha1222]](https://github.com/devinandha1222)
+  * Ishitha Praveen - CB.SC.U4CYS23018 [[@ishitha05praveen]](https://github.com/ishitha05praveen)
 
 ---
 
